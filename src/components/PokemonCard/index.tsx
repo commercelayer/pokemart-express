@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import Image from "next/image";
-import TypeTag, { PokemonType, typeColorMap } from "../TypeTag";
+import TypeTag, { isPokemonType } from "../TypeTag";
 import { useMemo } from "react";
 
 export type PokemonCardProps = {
@@ -12,10 +12,6 @@ export type PokemonCardProps = {
   href: string;
   imageUrl: string | null;
   type?: "default" | "compact";
-};
-
-const isPokemonType = (type: string): type is PokemonType => {
-  return Object.keys(typeColorMap).includes(type);
 };
 
 const PokemonCard: React.FC<PokemonCardProps> = ({

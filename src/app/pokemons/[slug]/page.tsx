@@ -2,6 +2,7 @@ import { cache } from "react";
 import { NextPage } from "next";
 import { PokemonClient, Pokemon } from "pokenode-ts";
 import Gallery from "@/components/Gallery";
+import TypeTag, { isPokemonType, typeColorMap } from "@/components/TypeTag";
 
 const LOCALE = "en";
 
@@ -9,6 +10,22 @@ type PageProps = {
   params?: {
     slug?: string | string[];
   };
+};
+
+type Theme = {
+  text: string;
+  bg: string;
+  hover: string;
+};
+
+const getMainTheme = (pokemonType: string) => {
+  if (!isPokemonType(pokemonType)) {
+    return {
+      text: "text-black",
+      bg: "bg-white",
+      hover: "bg-",
+    };
+  }
 };
 
 const Page: NextPage<PageProps> = async ({ params }) => {
@@ -43,12 +60,13 @@ const Page: NextPage<PageProps> = async ({ params }) => {
           <p className="text-gray-300 mb-4">{pokemon.description}</p>
         )}
         <div className="flex flex-wrap gap-2">
-          <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
-            Electric
-          </span>
-          <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-            Static
-          </span>
+          {pokemon.types.map(({ type: { name } }, id) => {
+            if (!isPokemonType(name)) {
+              return null;
+            }
+
+            return <TypeTag key={id} type={name} />;
+          })}
         </div>
       </div>
     </div>

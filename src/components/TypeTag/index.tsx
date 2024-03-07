@@ -30,6 +30,12 @@ interface TypeTagProps {
   className?: string;
 }
 
+export const isPokemonType = (
+  type: string | PokemonType,
+): type is PokemonType => {
+  return Object.keys(typeColorMap).includes(type);
+};
+
 const TypeTag: React.FC<TypeTagProps> = ({ type, className }) => {
   const colorClasses = typeColorMap[type];
   return (

@@ -10,9 +10,12 @@
     "format": "prettier . --write"
   },
   "dependencies": {
+    "@commercelayer/js-auth": "^6.1.0",
+    "@commercelayer/react-components": "^4.13.0",
     "axios": "^1.6.7",
     "axios-cache-interceptor": "^1.5.1",
     "classnames": "^2.5.1",
+    "js-auth": "link:@types/@commercelayer/js-auth",
     "next": "14.1.0",
     "pokenode-ts": "^1.20.0",
     "react": "^18",

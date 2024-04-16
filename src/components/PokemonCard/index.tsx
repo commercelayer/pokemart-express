@@ -49,7 +49,6 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   return (
     <Link
       href={href}
-      passHref
       className="shadow-lg hover:shadow-xl border-white border-8 overflow-hidden text-gray-600"
     >
       {type === "default" && imageNode}

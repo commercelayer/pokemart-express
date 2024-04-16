@@ -22,13 +22,12 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
-        className="w-full rounded-lg mb-4 cursor-pointer border border-gray-900"
+        className="w-full rounded-lg mb-4 border border-gray-900"
       >
         <img
           className="w-full object-cover"
           src={selectedImage}
           alt="Selected Image"
-          onClick={() => handleImageClick(selectedImage)}
         />
       </div>
       <div className="flex flex-wrap">

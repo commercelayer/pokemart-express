@@ -54,6 +54,7 @@ export default function Home() {
             "squirtle",
             "bulbasaur",
             "eevee",
+            "onix",
           ]}
         />
       </div>

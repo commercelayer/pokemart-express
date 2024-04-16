@@ -1,8 +1,8 @@
 import { cache } from "react";
 import { NextPage } from "next";
 import { PokemonClient, Pokemon } from "pokenode-ts";
+import Gallery from "@/components/Gallery";
 import TypeTag, { isPokemonType, typeColorMap } from "@/components/TypeTag";
-import PokemonEncounter from "@/components/PokemonEncounter";
 
 const LOCALE = "en";
 
@@ -35,9 +35,40 @@ const Page: NextPage<PageProps> = async ({ params }) => {
     return <p>Pokemon not found.</p>;
   }
 
+  const { front_default: mainImage, ...images } = pokemon.sprites;
+  const galleryImages: string[] = Object.values(images).filter(
+    (url): url is string => typeof url === "string",
+  );
+
   return (
-    <div className="bg-gray-800 min-h-screen px-5 py-10">
-      <PokemonEncounter pokemon={pokemon} />
+    <div className="bg-gray-800 min-h-screen flex flex-col-reverse md:flex-row justify-center items-start">
+      <div className="max-w-xl md:w-1/3 lg:w-1/2 p-8 flex flex-col justify-center items-center lg:items-start">
+        <Gallery images={[mainImage as string, ...galleryImages]} />
+      </div>
+      <div className="max-w-xl md:w-2/3 lg:w-1/2 bg-gray-900 p-8 m-8 rounded-lg shadow-lg">
+        <h1 className="text-3xl text-yellow-400 font-bold mb-2">
+          {pokemon.name}
+        </h1>
+        <p className="text-gray-300 mb-4">#{pokemon.id}</p>
+        <div className="flex justify-between items-center mb-4">
+          <span className="text-xl font-bold text-yellow-400">$10.00</span>
+          <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
+            Add to Cart
+          </button>
+        </div>
+        {pokemon.description && (
+          <p className="text-gray-300 mb-4">{pokemon.description}</p>
+        )}
+        <div className="flex flex-wrap gap-2">
+          {pokemon.types.map(({ type: { name } }, id) => {
+            if (!isPokemonType(name)) {
+              return null;
+            }
+
+            return <TypeTag key={id} type={name} />;
+          })}
+        </div>
+      </div>
     </div>
   );
 };

@@ -54,7 +54,7 @@ const PokemonEncounter = ({ pokemon }: PokemonEncounterProps) => {
   }, [catchingStatus, addToCart, pokemon]);
 
   return (
-    <div className="w-full p-4 bg-white rounded-lg mb-4 border border-gray-900 flex flex-col items-end relative">
+    <div className="w-full p-4 bg-white rounded-lg mb-4 border border-gray-900 flex flex-col items-end relative text-black">
       <div className="absolute top-4 left-4 min-w-32">
         <h2 className="text-lg">
           {pokemon.name.toUpperCase()} #{pokemon.id}

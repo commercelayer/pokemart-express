@@ -18,9 +18,9 @@ export default function Home() {
           body={
             <>
               <p>
-                Welcome to PokéMart Express, where we're pushing the boundaries
+                Welcome to PokéMart Express, where we are pushing the boundaries
                 of e-commerce by demonstrating that you can commercify anything
-                – even Pokémon! In this experimental project, we're showcasing
+                – even Pokémon! In this experimental project, we are showcasing
                 the versatility of Commerce Layer, proving that you can build a
                 fully functional online store without the need for a traditional
                 CMS. Dive into our digital playground, where every pixel is a

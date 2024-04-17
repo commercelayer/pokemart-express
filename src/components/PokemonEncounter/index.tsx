@@ -26,7 +26,7 @@ const PokemonEncounter = ({ pokemon }: PokemonEncounterProps) => {
   const { front_default: mainImage } = pokemon.sprites;
   const statusToDialogBoxMap = useMemo(() => {
     return {
-      none: `A wild ${pokemon.name.toUpperCase()} has appeard!`,
+      none: `A wild ${pokemon.name.toUpperCase()} has appeared!`,
       catching: "",
       cought: `${pokemon.name.toUpperCase()} has been added to your cart!`,
     };

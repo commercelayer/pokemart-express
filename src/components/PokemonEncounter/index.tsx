@@ -1,13 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
 import { Pokemon } from "pokenode-ts";
 import classNames from "classnames";
-import DialogBox from "@/components/DialogBox";
-// import pokeballImage from "@/assets/pokeball.png";
 import Image from "next/image";
+import {
+  Price,
+  PricesContainer,
+  useOrderContainer,
+} from "@commercelayer/react-components";
+import DialogBox from "@/components/DialogBox";
 
-/* eslint-disable @next/next/no-img-element */
 export type PokemonEncounterProps = {
   pokemon: Pokemon;
 };
@@ -18,6 +22,7 @@ const PokemonEncounter = ({ pokemon }: PokemonEncounterProps) => {
   const [catchingStatus, setCatchingStatus] = useState<
     "none" | "catching" | "cought"
   >("none");
+  const { addToCart } = useOrderContainer();
   const { front_default: mainImage } = pokemon.sprites;
   const statusToDialogBoxMap = useMemo(() => {
     return {
@@ -30,7 +35,14 @@ const PokemonEncounter = ({ pokemon }: PokemonEncounterProps) => {
   useEffect(() => {
     if (catchingStatus === "catching") {
       setTimeout(() => {
-        setCatchingStatus("cought");
+        addToCart({
+          skuCode: pokemon.name,
+          quantity: 1,
+        })
+          .then(() => {
+            setCatchingStatus("cought");
+          })
+          .catch(console.error);
       }, CATCHING_DURATION);
     }
 
@@ -39,7 +51,7 @@ const PokemonEncounter = ({ pokemon }: PokemonEncounterProps) => {
         setCatchingStatus("none");
       }, CATCHING_DURATION);
     }
-  }, [catchingStatus]);
+  }, [catchingStatus, addToCart, pokemon]);
 
   return (
     <div className="w-full p-4 bg-white rounded-lg mb-4 border border-gray-900 flex flex-col items-end relative">
@@ -47,7 +59,11 @@ const PokemonEncounter = ({ pokemon }: PokemonEncounterProps) => {
         <h2 className="text-lg">
           {pokemon.name.toUpperCase()} #{pokemon.id}
         </h2>
-        <div className="pokemon-data font-bold">${pokemon.id * 3}.00</div>
+        <div className="pokemon-data font-bold">
+          <PricesContainer>
+            <Price skuCode={pokemon.name} />
+          </PricesContainer>
+        </div>
       </div>
       <div
         className="w-1/2 flex justify-center relative"

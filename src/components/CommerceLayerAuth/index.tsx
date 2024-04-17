@@ -21,17 +21,31 @@ const getStoredAuthorization = (market: number): Authorization | null => {
   const authAsString = localStorage.getItem(`authorization-${market}`);
 
   if (authAsString != null) {
-    return JSON.parse(authAsString);
+    const localAuth = JSON.parse(authAsString);
+    return {
+      ...localAuth,
+      expires: new Date(localAuth.expires),
+    };
   }
 
   return null;
 };
 
-const hasExpired = (time?: Date): boolean =>
-  time === undefined || time < new Date(Date.now());
+const hasExpired = (time?: Date): boolean => {
+  if (!time) {
+    return true;
+  }
 
-const isValid = (auth: Authorization | null): auth is Authorization =>
-  auth != null ? !hasExpired(auth.expires) : false;
+  return time < new Date(Date.now());
+};
+
+const isValid = (auth: Authorization | null): auth is Authorization => {
+  if (!auth) {
+    return false;
+  }
+
+  return !hasExpired(auth.expires);
+};
 
 const CommerceLayerAuth = ({
   children,
@@ -45,8 +59,9 @@ const CommerceLayerAuth = ({
 
   useEffect(() => {
     const storedAuthorization = getStoredAuthorization(market);
+    const storedAuthIsValid = isValid(storedAuthorization);
 
-    if (isValid(storedAuthorization)) {
+    if (storedAuthIsValid) {
       setAuthorization(storedAuthorization);
       return;
     }
@@ -65,7 +80,8 @@ const CommerceLayerAuth = ({
   }, [clientId, market]);
 
   if (!authorization) {
-    return <>{children}</>;
+    return null;
+    // return <>{children}</>;
   }
 
   return (

@@ -38,11 +38,11 @@ const PokemonGrid: React.FC<PokemonGridProps> = ({ pokemonNames, type }) => {
               key={index}
               title={capitalize(pokemon.name)}
               subtitle={`#${pokemon.id}`}
-              price={(pokemon.id * 3).toFixed(2)} // @todo: connect to Commerce Layer
               types={pokemon.types.map((type) => type.type.name)}
               href={`/pokemons/${pokemon.name}`}
               imageUrl={pokemon.sprites.front_default}
               type={type}
+              sku={pokemon.name}
             />
           ))}
     </div>

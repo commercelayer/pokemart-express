@@ -9,6 +9,8 @@ export type PokemonType =
   | "ghost"
   | "dark"
   | "fairy"
+  | "rock"
+  | "ground"
   | "poison";
 
 export const typeColorMap: Record<PokemonType, string> = {
@@ -23,6 +25,8 @@ export const typeColorMap: Record<PokemonType, string> = {
   dark: "text-gray-800 bg-gray-200",
   fairy: "text-pink-500 bg-pink-100",
   poison: "text-purple-700 bg-purple-200",
+  rock: "text-gray-500 bg-gray-100",
+  ground: "text-yellow-500 bg-yellow-100",
 };
 
 interface TypeTagProps {

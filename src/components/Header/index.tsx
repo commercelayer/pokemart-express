@@ -4,6 +4,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { useOrderContainer } from "@commercelayer/react-components";
 import Basket from "@/components/Basket";
 
 interface NavLinkProps {
@@ -30,9 +31,12 @@ const NavLink: React.FC<NavLinkProps> = ({ href, label }) => {
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { order } = useOrderContainer();
+
+  console.log({ line: order?.cart_url });
 
   return (
-    <header className="bg-white shadow py-4 relative">
+    <header className="bg-white shadow py-4 relative overflow-hidden">
       <nav className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
           <Link href="/">
@@ -96,7 +100,7 @@ const Header: React.FC = () => {
           <div
             className={`fixed inset-0 z-10 bg-black opacity-50 ${isMenuOpen ? "block" : "hidden"} sm:hidden`}
           ></div>
-          <Basket items={0} href="/checkout" />
+          <Basket items={order?.skus_count || 0} />
         </div>
       </nav>
     </header>

@@ -3,25 +3,26 @@ import Link from "next/link";
 import Image from "next/image";
 import TypeTag, { isPokemonType } from "../TypeTag";
 import { useMemo } from "react";
+import { Price, PricesContainer } from "@commercelayer/react-components";
 
 export type PokemonCardProps = {
   title: string;
   subtitle: string;
-  price: string;
   types: string[];
   href: string;
   imageUrl: string | null;
   type?: "default" | "compact";
+  sku: string;
 };
 
 const PokemonCard: React.FC<PokemonCardProps> = ({
   title,
   subtitle,
-  price,
   types,
   href,
   imageUrl,
   type = "default",
+  sku,
 }) => {
   const imageNode = useMemo(() => {
     if (!imageUrl) {
@@ -61,7 +62,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
           {type === "compact" && imageNode}
         </div>
         <div className="flex justify-between items-center mt-4">
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap gap-1">
             {types.map((type, id) => {
               if (!isPokemonType(type)) {
                 return null;
@@ -71,13 +72,9 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
             })}
           </div>
           <span className="text-xl font-bold flex items-center gap-2">
-            <Image
-              src="/images/logo.png"
-              alt="pokédollars"
-              width={15}
-              height={15}
-            />
-            {price}
+            <PricesContainer>
+              <Price skuCode={sku} />
+            </PricesContainer>
           </span>
         </div>
       </div>

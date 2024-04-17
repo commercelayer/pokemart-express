@@ -1,7 +1,6 @@
 import { cache } from "react";
 import { NextPage } from "next";
 import { PokemonClient, Pokemon } from "pokenode-ts";
-import TypeTag, { isPokemonType, typeColorMap } from "@/components/TypeTag";
 import PokemonEncounter from "@/components/PokemonEncounter";
 
 const LOCALE = "en";
@@ -10,22 +9,6 @@ type PageProps = {
   params?: {
     slug?: string | string[];
   };
-};
-
-type Theme = {
-  text: string;
-  bg: string;
-  hover: string;
-};
-
-const getMainTheme = (pokemonType: string) => {
-  if (!isPokemonType(pokemonType)) {
-    return {
-      text: "text-black",
-      bg: "bg-white",
-      hover: "bg-",
-    };
-  }
 };
 
 const Page: NextPage<PageProps> = async ({ params }) => {

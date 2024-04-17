@@ -36,8 +36,9 @@ export default function Home() {
               </p>
               <div className="text-right">
                 <Link
-                  href="https://github.com"
+                  href="https://github.com/alexcanessa/pokemart-express"
                   className="button align-self-end"
+                  target="_blank"
                 >
                   Checkout the repo on GitHub
                 </Link>

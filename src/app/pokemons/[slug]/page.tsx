@@ -39,7 +39,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
   );
 };
 
-export const getData = cache(
+const getData = cache(
   async (
     paramSlug?: string | string[],
   ): Promise<(Pokemon & { description: string | undefined }) | null> => {

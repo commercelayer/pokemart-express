@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const clientId = process.env.CL_CLIENT_ID;
-  const market = parseFloat(process.env.CL_MARKET || "0");
+  const market = process.env.CL_MARKET;
   const slug = process.env.CL_SLUG;
 
   if (!clientId || !market || !slug) {

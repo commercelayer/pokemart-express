@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@commercelayer/js-auth':
-    specifier: ^6.1.0
-    version: 6.1.0
+    specifier: ^6.5.0
+    version: 6.5.0
   '@commercelayer/react-components':
     specifier: ^4.13.0
     version: 4.13.0(eslint@8.56.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
@@ -139,8 +139,8 @@ packages:
     resolution: {integrity: sha512-UIrJB+AfKU0CCfbMoWrsGpd2D/hBpY/SGgFI6WRHPOwhaZ3g9rz1weiJ6eb6L9KgVyunT7s2tckcPkbHw+NzeA==}
     dev: false
 
-  /@commercelayer/js-auth@6.1.0:
-    resolution: {integrity: sha512-3xqSyWOGIdBIWZvv7v1M0xHcnXwmIcnpseKteheJ8d8ziGYBQasz6U1cVvnRcx83ACNIN0gcabCD4Uqw+bndag==}
+  /@commercelayer/js-auth@6.5.0:
+    resolution: {integrity: sha512-EFWQyS6NRhrCpY/vwweej3iRr4T6X1YjyeGOqoUknEXDHNzwm3+WcC/g2uTrUDSLBQCkm4U4y6AWd67bKAdxCQ==}
     engines: {node: '>=18.0.0'}
     dev: false
 

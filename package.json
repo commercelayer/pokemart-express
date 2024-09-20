@@ -10,7 +10,7 @@
     "format": "prettier . --write"
   },
   "dependencies": {
-    "@commercelayer/js-auth": "^6.1.0",
+    "@commercelayer/js-auth": "^6.5.0",
     "@commercelayer/react-components": "^4.13.0",
     "axios": "^1.6.7",
     "axios-cache-interceptor": "^1.5.1",

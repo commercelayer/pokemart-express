@@ -12,12 +12,12 @@ export type CommerceLayerAuthProps = {
   children: ReactNode;
   clientId: string;
   slug: string;
-  market: number;
+  market: string;
 };
 
 type Authorization = AuthenticateReturn<"client_credentials">;
 
-const getStoredAuthorization = (market: number): Authorization | null => {
+const getStoredAuthorization = (market: string): Authorization | null => {
   const authAsString = localStorage.getItem(`authorization-${market}`);
 
   if (authAsString != null) {
@@ -69,7 +69,7 @@ const CommerceLayerAuth = ({
     const fetchAuthorization = async () => {
       const auth = await authenticate("client_credentials", {
         clientId,
-        scope: `market:${market}`,
+        scope: `market:code:${market}`,
       });
 
       localStorage.setItem(`authorization-${market}`, JSON.stringify(auth));

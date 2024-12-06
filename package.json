@@ -12,6 +12,7 @@
   "dependencies": {
     "@commercelayer/js-auth": "^6.5.0",
     "@commercelayer/react-components": "^4.13.0",
+    "@commercelayer/sdk": "^6.25.1",
     "axios": "^1.6.7",
     "axios-cache-interceptor": "^1.5.1",
     "classnames": "^2.5.1",

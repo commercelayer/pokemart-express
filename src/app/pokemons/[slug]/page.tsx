@@ -2,6 +2,7 @@ import { cache } from "react";
 import { NextPage } from "next";
 import { PokemonClient, Pokemon } from "pokenode-ts";
 import PokemonEncounter from "@/components/PokemonEncounter";
+import Page from "@/components/Page";
 
 const LOCALE = "en";
 
@@ -11,7 +12,7 @@ type PageProps = {
   };
 };
 
-const Page: NextPage<PageProps> = async ({ params }) => {
+const PokemonPage: NextPage<PageProps> = async ({ params }) => {
   const pokemon = await getData(params?.slug);
 
   if (pokemon === null) {
@@ -19,23 +20,25 @@ const Page: NextPage<PageProps> = async ({ params }) => {
   }
 
   return (
-    <div className="bg-gray-800 min-h-screen px-5 py-10">
-      <div
-        className="mx-auto"
-        style={{
-          maxWidth: "700px",
-        }}
-      >
-        <PokemonEncounter pokemon={pokemon} />
-        <div className="text-white">
-          <p>{pokemon.description}</p>
-          <p>
-            <strong>weight: </strong>
-            {pokemon.weight} kg
-          </p>
+    <Page>
+      <div className="bg-gray-800 min-h-screen px-5 py-10">
+        <div
+          className="mx-auto"
+          style={{
+            maxWidth: "700px",
+          }}
+        >
+          <PokemonEncounter pokemon={pokemon} />
+          <div className="text-white">
+            <p>{pokemon.description}</p>
+            <p>
+              <strong>weight: </strong>
+              {pokemon.weight} kg
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </Page>
   );
 };
 
@@ -70,4 +73,4 @@ const getData = cache(
   },
 );
 
-export default Page;
+export default PokemonPage;

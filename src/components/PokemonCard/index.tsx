@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import Image from "next/image";
 import TypeTag, { isPokemonType } from "../TypeTag";
 import { useMemo } from "react";
 import { Price, PricesContainer } from "@commercelayer/react-components";

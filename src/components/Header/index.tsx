@@ -33,8 +33,6 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { order } = useOrderContainer();
 
-  console.log({ line: order?.cart_url });
-
   return (
     <header className="bg-white shadow py-4 relative overflow-hidden text-black">
       <nav className="container mx-auto px-4 flex justify-between items-center">

@@ -10,8 +10,6 @@ export default function Page({
   const market = process.env.CL_MARKET;
   const slug = process.env.CL_SLUG;
 
-  console.log("ROOT LAYOUT");
-
   if (!clientId || !market || !slug) {
     throw new Error(
       "You need to set the CL_CLIENT_ID and CL_MARKET environment variables.",

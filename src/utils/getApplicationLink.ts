@@ -38,7 +38,7 @@ interface TArgs {
 
 type Props = ApplicationTypeProps & TArgs;
 
-const endpoint = `https://${process.env.NEXT_PUBLIC_CL_SLUG}.commercelayer.io`;
+const endpoint = `https://${process.env.CL_SLUG}.commercelayer.io`;
 
 export function getDomain(endpoint: string): { slug: string; domain: string } {
   const url = new URL(endpoint);

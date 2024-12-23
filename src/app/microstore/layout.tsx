@@ -23,7 +23,6 @@ export default function MicrostoreLayout({
     );
   }
 
-  // @note: I don't think I should keep this??
   const persistKey = `order-${market}`;
 
   return (

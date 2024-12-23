@@ -69,7 +69,7 @@ const CommerceLayerAuth = ({
     const fetchAuthorization = async () => {
       const auth = await authenticate("client_credentials", {
         clientId,
-        scope: `market:code:${market}`,
+        scope: `market:id:${market}`,
       });
 
       localStorage.setItem(`authorization-${market}`, JSON.stringify(auth));

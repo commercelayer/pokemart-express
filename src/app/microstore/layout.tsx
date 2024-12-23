@@ -7,9 +7,6 @@ import {
   OrderStorage,
 } from "@commercelayer/react-components";
 
-const slug = process.env.CL_SLUG;
-const market = process.env.CL_MARKET;
-
 export default function MicrostoreLayout({
   children,
 }: Readonly<{
@@ -17,6 +14,8 @@ export default function MicrostoreLayout({
 }>) {
   const searchParams = useSearchParams();
   const accessToken = searchParams?.get("accessToken");
+  const slug = process.env.NEXT_PUBLIC_CL_SLUG;
+  const market = process.env.NEXT_PUBLIC_CL_MARKET;
 
   if (!accessToken || !slug || !market) {
     throw new Error(
@@ -24,7 +23,7 @@ export default function MicrostoreLayout({
       {
         cause: `accessToken: ${Boolean(accessToken)}, slug: ${Boolean(
           slug,
-        )}, market: ${Boolean(market)} - test: ${process.env.CL_SLUG + ", " + process.env.CL_MARKET}`,
+        )}, market: ${Boolean(market)}`,
       },
     );
   }

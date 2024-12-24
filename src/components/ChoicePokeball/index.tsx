@@ -63,7 +63,7 @@ const ChoicePokeball = ({
         {/* Reveal pokemon here */}
         <span
           className={classnames(
-            "absolute overflow-hidden transition-transform duration-700 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-0 h-0 group-hover:w-[80%] group-hover:h-[80%] rounded-full bg-white",
+            "absolute overflow-hidden transition-transform duration-700 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-0 h-0 md:group-hover:w-[80%] md:group-hover:h-[80%] rounded-full bg-white",
             {
               "w-[80%] h-[80%] -mt-10": state === "selected",
             },

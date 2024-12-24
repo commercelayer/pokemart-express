@@ -69,10 +69,8 @@ const MicrostorePage = () => {
 
   const handlePokemonSelection = useCallback(async () => {
     try {
-      if (!(accessToken && client && selectedPokemon)) {
-        throw new Error("Missing access token, client, or pokemon", {
-          cause: `${accessToken}, ${client}, ${selectedPokemon}`,
-        });
+      if (!(client && selectedPokemon)) {
+        throw new Error("Missing access token, client, or pokemon");
       }
 
       if (order) {
@@ -92,7 +90,7 @@ const MicrostorePage = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [accessToken, order, selectedPokemon, addToCart, client]);
+  }, [order, selectedPokemon, addToCart, client]);
 
   if (error) {
     return (

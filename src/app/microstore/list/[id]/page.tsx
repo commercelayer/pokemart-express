@@ -7,23 +7,26 @@ import classnames from "classnames";
 import ChoiceTable from "@/components/ChoiceTable";
 import ChoicePokeball from "@/components/ChoicePokeball";
 import {
+  AddToCartButton,
+  CheckoutLink,
   LineItemsContainer,
   useCommerceLayer,
   useOrderContainer,
 } from "@commercelayer/react-components";
 import DialogBox from "@/components/DialogBox";
 import capitalize from "@/utils/capitalize";
-import { getApplicationLink } from "@/utils/getApplicationLink";
 
 const MicrostorePage = () => {
   const { id: skuListId } = useParams() || {};
   const { sdkClient, accessToken } = useCommerceLayer();
   const { current: client } = useRef(sdkClient());
-  const { order, addToCart } = useOrderContainer();
+  const { order, addToCart, createOrder } = useOrderContainer();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+
+  console.log("re-render", order?.line_items);
 
   useEffect(() => {
     const fetchSkus = async () => {
@@ -66,15 +69,19 @@ const MicrostorePage = () => {
 
   const handlePokemonSelection = useCallback(async () => {
     try {
-      if (!(accessToken && client && order && selectedPokemon)) {
-        throw new Error("Missing access token, client, order, or pokemon");
+      if (!(accessToken && client && selectedPokemon)) {
+        throw new Error("Missing access token, client, or pokemon", {
+          cause: `${accessToken}, ${client}, ${selectedPokemon}`,
+        });
       }
 
-      await Promise.all(
-        (order.line_items || []).map((lineItem) => {
-          return client.line_items.delete(lineItem.id);
-        }),
-      );
+      if (order) {
+        await Promise.all(
+          (order.line_items || []).map((lineItem) => {
+            return client.line_items.delete(lineItem.id);
+          }),
+        );
+      }
 
       await addToCart({
         skuCode: selectedPokemon.name,
@@ -82,14 +89,6 @@ const MicrostorePage = () => {
       });
 
       setSelectedPokemon(null);
-
-      const href = getApplicationLink({
-        orderId: order.id,
-        accessToken,
-        applicationType: "checkout",
-      });
-
-      window.location.href = href;
     } catch (error) {
       console.error(error);
     }
@@ -114,11 +113,11 @@ const MicrostorePage = () => {
 
   return (
     <LineItemsContainer>
-      <div className="flex flex-col h-screen justify-between">
+      <div className="flex flex-col h-dvh justify-between">
         {selectedPokemon !== null ? (
           <>
             <DialogBox
-              className="relative z-40 m-10 max-w-[600px] mx-auto"
+              className="relative justify-self-center mt-auto self z-40 m-10 max-w-[600px] mx-auto"
               actions={[
                 {
                   content: "YES",
@@ -137,6 +136,17 @@ const MicrostorePage = () => {
             <div className="bg-black opacity-60 fixed top-0 right-0 bottom-0 left-0 z-30"></div>
           </>
         ) : null}
+        {order?.line_items?.length && selectedPokemon === null && (
+          <div className="self-center justify-self-center mt-auto relative z-20">
+            <div className="flex flex-col items-center justify-center p-5 h-full text-xl text-black shadow-pixel bg-white">
+              You have selected {order.line_items[0].name}!
+              <CheckoutLink
+                className="underline mt-2"
+                label="Start your adventure!"
+              />
+            </div>
+          </div>
+        )}
         <ChoiceTable className="mb-0 mt-auto justify-self-end">
           {loading
             ? "Loading starters..."
@@ -157,8 +167,8 @@ const MicrostorePage = () => {
                   />
                 );
               })}
-          <Lab />
         </ChoiceTable>
+        <Lab />
       </div>
     </LineItemsContainer>
   );

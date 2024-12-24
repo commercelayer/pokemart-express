@@ -61,8 +61,10 @@ body {
     border-bottom: 8px solid transparent;
   }
 
-  .catch-it-button:hover::before {
-    display: block;
+  @media not all and (hover: none) {
+    .catch-it-button:hover::before {
+      display: block;
+    }
   }
 
   .pokemon-data {

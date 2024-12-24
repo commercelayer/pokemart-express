@@ -8,8 +8,8 @@ const ChoiceTable = ({
   className?: string;
 }) => {
   return (
-    <div className={classnames("pb-12", className)}>
-      <div className="px-5 flex justify-around align-middle gap-10">
+    <div className={classnames("pb-20", className)}>
+      <div className="px-5 flex justify-around align-middle gap-10 bg-black">
         {children}
       </div>
       <div className="absolute overflow-hidden z-10 bottom-0 flex justify-center items-center bg-green-600 h-[200px] w-full border-b-green-800 border-b-[20px]">

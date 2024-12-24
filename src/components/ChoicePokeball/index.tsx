@@ -41,10 +41,11 @@ const ChoicePokeball = ({
         <Image
           src="/images/pokeball-big.png"
           alt="Pokeball"
+          priority
           width={200}
           height={200}
           className={classnames(
-            "relative z-20 group-hover:animate-[shake_1s_ease-in-out] duration-700",
+            "relative z-20 md:group-hover:animate-[shake_1s_ease-in-out] duration-700",
             {
               "-translate-y-10 !animate-none": state === "selected",
             },

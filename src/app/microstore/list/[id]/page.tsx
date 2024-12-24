@@ -136,13 +136,21 @@ const MicrostorePage = () => {
         ) : null}
         {order?.line_items?.length && selectedPokemon === null && (
           <div className="self-center justify-self-center mt-auto relative z-20">
-            <div className="flex flex-col items-center justify-center p-5 h-full text-xl text-black shadow-pixel bg-white">
-              You have selected {order.line_items[0].name}!
-              <CheckoutLink
-                className="underline mt-2"
-                label="Start your adventure!"
-              />
-            </div>
+            <CheckoutLink>
+              {({ href }) => {
+                return (
+                  <a
+                    href={href}
+                    className="flex flex-col items-center justify-center p-5 h-full text-xl text-black shadow-pixel bg-white"
+                  >
+                    You have selected {order?.line_items?.[0]?.name}.
+                    <span className="underline mt-2">
+                      Start your adventure!
+                    </span>
+                  </a>
+                );
+              }}
+            </CheckoutLink>
           </div>
         )}
         <ChoiceTable className="mb-0 mt-auto justify-self-end">
